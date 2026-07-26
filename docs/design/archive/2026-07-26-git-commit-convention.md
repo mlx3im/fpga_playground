@@ -37,9 +37,9 @@ automation.
 
 ## Canonical Docs (optional — remove if not applicable)
 
-- [`AGENTS.md`](../../AGENTS.md)
-- [`docs/PLAN_TEMPLATE.md`](../PLAN_TEMPLATE.md)
-- [`docs/DECISIONS.md`](../DECISIONS.md)
+- [`AGENTS.md`](../../../AGENTS.md)
+- [`docs/PLAN_TEMPLATE.md`](../../PLAN_TEMPLATE.md)
+- [`docs/DECISIONS.md`](../../DECISIONS.md)
 
 ## Current State / Code Facts (optional — remove if not applicable)
 

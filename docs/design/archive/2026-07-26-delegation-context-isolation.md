@@ -44,8 +44,8 @@ context from separate tasks being mixed during AI-assisted work.
 
 ## Canonical Docs (optional — remove if not applicable)
 
-- [`AGENTS.md`](../../AGENTS.md)
-- [`docs/PLAN_TEMPLATE.md`](../PLAN_TEMPLATE.md)
+- [`AGENTS.md`](../../../AGENTS.md)
+- [`docs/PLAN_TEMPLATE.md`](../../PLAN_TEMPLATE.md)
 
 ## Current State / Code Facts (optional — remove if not applicable)
 

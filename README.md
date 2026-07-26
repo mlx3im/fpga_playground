@@ -10,3 +10,6 @@ planned using [`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md).
 The initial hardware target is the [Sipeed Tang Nano 9K](docs/boards/tang-nano-9k.md).
 The project foundation and repository boundaries are documented in
 [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
+
+For documentation changes, run
+[`tools/check-doc-links`](tools/check-doc-links) from the repository root.

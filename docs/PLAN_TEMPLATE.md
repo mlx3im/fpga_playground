@@ -24,6 +24,8 @@ Primary decision channel:
 5. Move the completed or paused plan to
    `docs/design/archive/YYYY-MM-DD-<slug>.md` and update its status and archive
    date.
+6. After moving a plan, repair its relative links and run
+   [`tools/check-doc-links`](../tools/check-doc-links) from the repository root.
 
 Plans are the working source of truth for task scope and decisions. Durable
 cross-task decisions belong in [`docs/DECISIONS.md`](DECISIONS.md); plan-local
@@ -61,6 +63,14 @@ Plan-local decisions are listed below. Durable decisions are recorded in
 ## Open Questions (optional — remove if not applicable)
 
 ## Immediate Next Tasks (required)
+
+When archiving a plan, complete this checklist before marking the work done:
+
+- update the lifecycle metadata
+- move the plan to `docs/design/archive/`
+- repair relative links from the archived location
+- run `tools/check-doc-links`
+- record the validation result in the plan
 
 ## Review Packets (optional — remove if not applicable)
 
