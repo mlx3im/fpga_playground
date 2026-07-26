@@ -6,10 +6,6 @@ Date created: YYYY-MM-DD
 Last updated: YYYY-MM-DD
 Date shipped: YYYY-MM-DD
 Date archived: YYYY-MM-DD
-Linear issue:
-Linear project:
-GitHub repository:
-Last Linear sync:
 Primary decision channel:
 
 ## How to use this template
@@ -26,6 +22,13 @@ Primary decision channel:
    date.
 6. After moving a plan, repair its relative links and run
    [`tools/check-doc-links`](../tools/check-doc-links) from the repository root.
+
+## External Tracking (optional)
+
+Linear issue:
+Linear project:
+GitHub repository:
+Last Linear sync:
 
 Plans are the working source of truth for task scope and decisions. Durable
 cross-task decisions belong in [`docs/DECISIONS.md`](DECISIONS.md); plan-local
