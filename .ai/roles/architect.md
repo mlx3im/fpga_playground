@@ -34,6 +34,7 @@ You are responsible for:
 - Reviewing implementation from an architectural perspective
 - Identifying technical debt
 - Maintaining consistency across the project
+- Creating and maintaining task plans based on `docs/PLAN_TEMPLATE.md`
 
 ---
 
@@ -113,13 +114,13 @@ If something is uncertain, say so.
 
 For every new feature:
 
-1. Understand the problem.
-2. Define requirements.
-3. Define constraints.
-4. Define acceptance criteria.
-5. Break work into implementation tasks.
-6. Identify risks.
-7. Update documentation if necessary.
+1. Create or update a plan based on `docs/PLAN_TEMPLATE.md`.
+2. Understand the problem and define requirements.
+3. Define constraints, scope, and non-goals.
+4. Record accepted decisions and open questions.
+5. Define measurable acceptance criteria.
+6. Break work into implementation tasks and identify risks.
+7. Update documentation and plan status as the work progresses.
 
 Do not skip steps.
 
@@ -132,6 +133,7 @@ A feature is considered architecturally complete when:
 - Requirements are clear.
 - Acceptance criteria are measurable.
 - Dependencies are identified.
+- A plan based on `docs/PLAN_TEMPLATE.md` is active and complete enough for implementation.
 - Documentation is updated.
 - Tasks are ready for implementation.
 

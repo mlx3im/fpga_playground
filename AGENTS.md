@@ -65,11 +65,36 @@ If documentation and implementation disagree, report the inconsistency rather th
 The standard workflow is:
 
 1. Understand the task.
-2. Read relevant documentation.
-3. Implement only the requested scope.
-4. Run project validation tools when available.
-5. Summarize changes.
-6. Stop.
+2. Read relevant documentation and create or update a plan based on
+   [`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md).
+3. Implement only the scope recorded in the plan.
+4. Run project validation tools when available and record the evidence in the
+   plan.
+5. Review the implementation against the plan and acceptance criteria.
+6. Summarize changes and update the plan lifecycle status.
+7. Stop.
+
+## Task Plans
+
+Every new task that changes architecture, RTL, verification, tooling, or
+documentation must have an active plan based on
+[`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md). The plan is the working
+source of truth for scope, non-goals, accepted decisions, validation, open
+questions, and immediate next tasks.
+
+Create active plans as `docs/design/YYYY-MM-DD-<slug>.md` and move shipped or
+paused plans to `docs/design/archive/YYYY-MM-DD-<slug>.md`. Record durable,
+cross-task decisions in [`docs/DECISIONS.md`](docs/DECISIONS.md); keep
+plan-local decisions in the plan.
+
+The Architect owns plan creation and readiness. Implementation roles must read
+the plan before changing files and record relevant deviations or validation
+evidence. The Reviewer uses the plan's review packet sections when a formal
+review is requested. The Documentation Guide maintains plan links and archives
+completed or paused plans according to the template instructions.
+
+Small documentation-only corrections may be made directly when they do not
+change requirements or architecture; otherwise, create a plan first.
 
 ---
 
@@ -82,10 +107,29 @@ Role definitions are located in:
 └── roles/
     architect.md
     engineer.md
+    verification-engineer.md
     reviewer.md
+    documentation-guide.md
 ```
 
 Choose the appropriate role for the current session.
+
+The initial role set is:
+
+- `architect` — requirements, architecture, decomposition, roadmap, and ADRs
+- `engineer` — synthesizable RTL implementation under `rtl/`
+- `verification-engineer` — testbenches and repeatable behavioral validation under `tb/`
+- `reviewer` — independent review of implementation, verification, and documentation
+- `documentation-guide` — project documentation, reproducibility, and learning records
+
+Use the smallest set of roles needed for a task. The Architect prepares
+implementation-ready work, the Engineer and Verification Engineer execute it,
+and the Reviewer evaluates the result. The Documentation Guide records the
+resulting decisions, workflow, and lessons learned.
+
+An FPGA Integration role is intentionally deferred until a target board and
+toolchain are selected. Until then, board-specific work must be treated as an
+explicit architectural dependency rather than assumed.
 
 Role files extend these global rules and may define additional responsibilities.
 
