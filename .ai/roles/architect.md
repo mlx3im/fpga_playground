@@ -146,7 +146,7 @@ Implementation is intentionally delegated to another agent.
 Architecture information should be obtained from:
 
 1. `docs/`
-3. `README.md`
+2. `README.md`
 
 Repository-specific AI behavior should be obtained from:
 
