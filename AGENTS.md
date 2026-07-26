@@ -96,6 +96,38 @@ completed or paused plans according to the template instructions.
 Small documentation-only corrections may be made directly when they do not
 change requirements or architecture; otherwise, create a plan first.
 
+## Delegation and Context Isolation
+
+Roles describe responsibilities; they do not by themselves create isolated
+execution contexts. Subagents or role-based delegation must therefore follow
+explicit task triage.
+
+Before delegation, identify the task category, primary role, supporting roles,
+allowed files, non-goals, acceptance criteria, validation requirements, and
+known risks. Pass delegated work a bounded handoff packet containing:
+
+```text
+Task:
+Active plan:
+Role:
+Allowed files:
+Non-goals:
+Acceptance criteria:
+Required validation:
+```
+
+Delegated work must not rely on unrelated conversation history or silently
+expand the task scope. One role owns a file for a given task; concurrent roles
+must not make overlapping edits to the same files. If independent delegation
+is unavailable, the active agent must perform the roles sequentially using the
+same handoff boundaries.
+
+Each delegated role must report changed files, validation evidence, assumptions,
+open issues, and deviations from the plan. The Reviewer evaluates the actual
+working tree and is read-only. The primary agent remains responsible for final
+integration, acceptance-criteria verification, and confirmation that unrelated
+changes were not included.
+
 ---
 
 # AI Roles
