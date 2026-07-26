@@ -27,4 +27,4 @@ For each durable decision, record:
   Consequences: Documentation and future integration will be board-aware, but
   reusable RTL must remain separate from board-specific wrappers. Supporting a
   second board will require an explicit architectural decision.
-  Related plans: [`2026-07-26-tang-nano-9k-foundation.md`](design/2026-07-26-tang-nano-9k-foundation.md)
+  Related plans: [`2026-07-26-tang-nano-9k-foundation.md`](design/archive/2026-07-26-tang-nano-9k-foundation.md)
