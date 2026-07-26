@@ -25,6 +25,7 @@ The project values maintainability, documentation, and engineering practices ove
 ```
 rtl/        Synthesizable HDL
 tb/         Testbenches
+constraints/ Board pin, timing, and implementation constraints
 docs/       Project documentation
 tools/      Helper scripts
 .ai/        AI roles, workflows and templates
