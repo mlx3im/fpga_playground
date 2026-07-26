@@ -1,10 +1,9 @@
-<!-- Active plan for the repository commit convention task. -->
-Status: Active
+Status: Shipped
 Owner: Architect
 Date created: 2026-07-26
 Last updated: 2026-07-26
-Date shipped:
-Date archived:
+Date shipped: 2026-07-26
+Date archived: 2026-07-26
 Linear issue:
 Linear project:
 GitHub repository:
