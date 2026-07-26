@@ -143,6 +143,50 @@ Documentation is considered part of the implementation.
 
 ---
 
+# Git Commit Convention
+
+Use the following format for new commits:
+
+```text
+<type>(<scope>): <imperative summary>
+
+<body>
+
+<footer>
+```
+
+Keep the subject concise and explain the motivation or important design
+decisions in the body when needed. Use a repository-oriented scope such as
+`rtl`, `tb`, `docs`, `tooling`, `ci`, or a specific module.
+
+Supported types are:
+
+- `feat` — new functionality
+- `fix` — defect correction
+- `rtl` — synthesizable HDL change
+- `test` — verification changes
+- `docs` — documentation or plan changes
+- `refactor` — structure-preserving code change
+- `build` — toolchain or build changes
+- `ci` — automation changes
+- `chore` — maintenance
+- `revert` — reversal of an earlier commit
+
+Examples:
+
+```text
+feat(rtl): add parameterized counter
+test(counter): verify rollover behavior
+docs(architecture): define clock and reset policy
+fix(tb): correct reset sequencing
+```
+
+Use the tracked [`.gitmessage`](.gitmessage) file as a local commit template
+with `git config commit.template .gitmessage`. Commit hooks and automated
+enforcement are deferred until the project needs them.
+
+---
+
 # Philosophy
 
 Favor:

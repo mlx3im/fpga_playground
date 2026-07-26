@@ -1,0 +1,14 @@
+# <type>(<scope>): <imperative summary>
+#
+# Explain why the change is needed and call out important design decisions.
+# Keep the subject concise; wrap body lines near 72 characters.
+#
+# Types: feat, fix, rtl, test, docs, refactor, build, ci, chore, revert
+# Scopes: rtl, tb, docs, tooling, ci, or a specific module/component
+#
+# Examples:
+# feat(rtl): add parameterized counter
+# test(counter): verify rollover behavior
+# docs(architecture): define clock and reset policy
+# fix(tb): correct reset sequencing
+
