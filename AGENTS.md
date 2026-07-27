@@ -1,111 +1,152 @@
-# AGENTS.md
-
 # AI Agent Guide
 
-Welcome to the FPGA Playground repository.
+Repository-wide instructions for every AI agent working on FPGA Playground.
+Role charters are under [`.ai/roles/`](.ai/roles/) and extend these rules.
 
-This file provides repository-wide instructions that apply to every AI agent working on this project.
+## Session Start
 
-Role-specific behavior is defined under `.ai/roles/`.
+Before the first action in a session:
 
----
+1. Read this file.
+2. Read [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
+   [`docs/DECISIONS.md`](docs/DECISIONS.md).
+3. Check `docs/design/` for an active plan. If the task changes architecture,
+   RTL, verification, tooling, or documentation and no active plan exists, the
+   Architect creates one from
+   [`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md) before any file changes.
+4. Read the charter for the role you will act in — see [Roles](#roles).
 
-# Project Overview
+## Project Overview
 
-This repository is an educational FPGA project.
+An educational FPGA project. The goal is learning AI-assisted engineering while
+developing FPGA designs. The project values maintainability, documentation, and
+engineering practice over implementation speed.
 
-The primary goal is to learn AI-assisted engineering while developing FPGA designs.
+## Current State
 
-The project values maintainability, documentation, and engineering practices over implementation speed.
+As of 2026-07-27 the repository is documentation-only. Update this section when
+that changes.
 
----
+- No RTL, testbenches, or constraints exist. `rtl/`, `tb/`, and `constraints/`
+  are a target layout, not directories on disk.
+- No simulator, synthesis flow, or programming utility has been selected.
+- The hardware target is the Sipeed Tang Nano 9K
+  ([`docs/boards/tang-nano-9k.md`](docs/boards/tang-nano-9k.md)).
+- `docs/design/` holds no active plan; all plans are shipped and archived.
 
-# Repository Layout
+Do not create the target directories, RTL, or testbenches before a plan selects
+a toolchain that can validate them. Work that cannot be simulated or built is
+not implementable work.
 
-```
-rtl/        Synthesizable HDL
-tb/         Testbenches
-constraints/ Board pin, timing, and implementation constraints
-docs/       Project documentation
-tools/      Helper scripts
-.ai/        AI roles, workflows and templates
-```
+## Global Rules
 
----
-
-# Global Rules
-
-These rules apply to every AI role.
-
-- Never invent requirements.
+- Never invent requirements; ask when they are ambiguous.
 - Never modify unrelated files.
-- Prefer incremental changes.
-- Ask for clarification if requirements are ambiguous.
+- Prefer incremental changes; keep each commit focused on one task.
 - Preserve existing project style.
 - Explain important design decisions.
-- Keep commits focused on a single task.
+- Treat documentation as part of the implementation and update it with the
+  change.
+- Never claim behavior that is not implemented or verified.
 
----
+Engineering philosophy is defined per role; see
+[`.ai/roles/architect.md`](.ai/roles/architect.md).
 
-# Source of Truth
+## Source of Truth
 
-When making decisions, use the following priority:
+When instructions conflict, use this priority:
 
 1. User instructions
-2. Current implementation task
-3. Architecture documents in `docs/`
+2. The active plan for the current task in `docs/design/`
+3. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) and
+   [`docs/DECISIONS.md`](docs/DECISIONS.md)
 4. Repository conventions
 5. This file
 
-If documentation and implementation disagree, report the inconsistency rather than silently choosing one.
+If documentation and implementation disagree, report the inconsistency rather
+than silently choosing one.
 
----
+## Repository Layout
 
-# Development Workflow
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) is the single source of truth
+for layout. It defines the responsibility of each top-level directory and the
+board-aware structure to grow into once implementation begins.
 
-The standard workflow is:
+Read it rather than copying it here — an earlier duplicate of that tree in this
+file drifted out of sync twice. Note that most of those directories do not yet
+exist; see [Current State](#current-state).
+
+## Development Workflow
 
 1. Understand the task.
-2. Read relevant documentation and create or update a plan based on
-   [`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md).
+2. Read or create the active plan.
 3. Implement only the scope recorded in the plan.
-4. Run project validation tools when available and record the evidence in the
-   plan.
-5. Review the implementation against the plan and acceptance criteria.
+4. Run the validation commands below and record the evidence in the plan.
+5. Review the implementation against the plan's acceptance criteria.
 6. Summarize changes and update the plan lifecycle status.
 7. Stop.
 
-## Task Plans
+### Validation
 
-Every new task that changes architecture, RTL, verification, tooling, or
-documentation must have an active plan based on
-[`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md). The plan is the working
-source of truth for scope, non-goals, accepted decisions, validation, open
-questions, and immediate next tasks.
+| Command | When |
+| --- | --- |
+| [`tools/check-doc-links`](tools/check-doc-links) | After any Markdown change, from the repository root. |
+| `git diff --check` | Before any commit. |
 
-Create active plans as `docs/design/YYYY-MM-DD-<slug>.md` and move shipped or
-paused plans to `docs/design/archive/YYYY-MM-DD-<slug>.md`. Record durable,
-cross-task decisions in [`docs/DECISIONS.md`](docs/DECISIONS.md); keep
-plan-local decisions in the plan.
+These are the only validation tools that exist. Simulation, synthesis, and
+timing validation are unavailable until a toolchain is selected; do not claim
+any of them.
 
-The Architect owns plan creation and readiness. Implementation roles must read
-the plan before changing files and record relevant deviations or validation
-evidence. The Reviewer uses the plan's review packet sections when a formal
-review is requested. The Documentation Guide maintains plan links and archives
-completed or paused plans according to the template instructions.
+### Task Plans
 
-Small documentation-only corrections may be made directly when they do not
-change requirements or architecture; otherwise, create a plan first.
+Every task that changes architecture, RTL, verification, tooling, or
+documentation needs an active plan. The plan is the working source of truth for
+that task's scope, decisions, validation, and next steps.
+
+- Create as `docs/design/YYYY-MM-DD-<slug>.md` from
+  [`docs/PLAN_TEMPLATE.md`](docs/PLAN_TEMPLATE.md).
+- Archive when shipped or paused as
+  `docs/design/archive/YYYY-MM-DD-<slug>.md`, then repair relative links and
+  run `tools/check-doc-links`.
+- Record durable cross-task decisions in
+  [`docs/DECISIONS.md`](docs/DECISIONS.md); plan-local decisions stay in the
+  plan.
+
+The Architect owns plan creation and readiness. Implementation roles read the
+plan before changing files and record deviations and validation evidence in it.
+
+Documentation-only corrections that change no requirement or architecture may
+be made directly.
+
+## Roles
+
+Read the role charter before acting in a role; the table is an index, not the
+charter. Use the smallest set of roles the task needs.
+
+| Task | Role | Owns |
+| --- | --- | --- |
+| Requirements, architecture, decomposition, plans | [architect](.ai/roles/architect.md) | `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/design/`, and repository conventions and tooling — `AGENTS.md`, `.ai/roles/`, `tools/`, `.gitignore`, `.gitmessage` |
+| Synthesizable HDL | [engineer](.ai/roles/engineer.md) | `rtl/` |
+| Testbenches and behavioral validation | [verification-engineer](.ai/roles/verification-engineer.md) | `tb/` |
+| Independent review of a change | [reviewer](.ai/roles/reviewer.md) | nothing — read-only |
+| README, docs, plan archival, learning records | [documentation-guide](.ai/roles/documentation-guide.md) | `README.md`, `docs/` except `docs/ARCHITECTURE.md` and `docs/DECISIONS.md`; performs plan lifecycle mechanics in `docs/design/` |
+| Board integration, constraints, build flow | deferred | — |
+
+One role owns a file for a given task; concurrent roles must not edit the same
+file.
+
+An FPGA Integration role remains deferred until a toolchain is selected. The
+board itself is already chosen, so board-specific work is blocked on tooling,
+not on target selection.
 
 ## Delegation and Context Isolation
 
-Roles describe responsibilities; they do not by themselves create isolated
-execution contexts. Subagents or role-based delegation must therefore follow
-explicit task triage.
+Roles do not by themselves create isolated execution contexts, so delegation
+requires explicit triage. Before delegating, identify the task category,
+primary and supporting roles, allowed files, non-goals, acceptance criteria,
+required validation, and known risks.
 
-Before delegation, identify the task category, primary role, supporting roles,
-allowed files, non-goals, acceptance criteria, validation requirements, and
-known risks. Pass delegated work a bounded handoff packet containing:
+Pass delegated work a bounded handoff packet:
 
 ```text
 Task:
@@ -117,68 +158,16 @@ Acceptance criteria:
 Required validation:
 ```
 
-Delegated work must not rely on unrelated conversation history or silently
-expand the task scope. One role owns a file for a given task; concurrent roles
-must not make overlapping edits to the same files. If independent delegation
-is unavailable, the active agent must perform the roles sequentially using the
-same handoff boundaries.
+Delegated work must not rely on unrelated conversation history or expand scope.
+Each delegated role reports changed files, validation evidence, assumptions,
+open issues, and deviations from the plan. If independent delegation is
+unavailable, perform the roles sequentially using the same boundaries.
 
-Each delegated role must report changed files, validation evidence, assumptions,
-open issues, and deviations from the plan. The Reviewer evaluates the actual
-working tree and is read-only. The primary agent remains responsible for final
-integration, acceptance-criteria verification, and confirmation that unrelated
-changes were not included.
+The Reviewer evaluates the actual working tree and is read-only. The primary
+agent remains responsible for final integration, acceptance-criteria
+verification, and confirming that no unrelated changes were included.
 
----
-
-# AI Roles
-
-Role definitions are located in:
-
-```
-.ai/
-└── roles/
-    architect.md
-    engineer.md
-    verification-engineer.md
-    reviewer.md
-    documentation-guide.md
-```
-
-Choose the appropriate role for the current session.
-
-The initial role set is:
-
-- `architect` — requirements, architecture, decomposition, roadmap, and ADRs
-- `engineer` — synthesizable RTL implementation under `rtl/`
-- `verification-engineer` — testbenches and repeatable behavioral validation under `tb/`
-- `reviewer` — independent review of implementation, verification, and documentation
-- `documentation-guide` — project documentation, reproducibility, and learning records
-
-Use the smallest set of roles needed for a task. The Architect prepares
-implementation-ready work, the Engineer and Verification Engineer execute it,
-and the Reviewer evaluates the result. The Documentation Guide records the
-resulting decisions, workflow, and lessons learned.
-
-An FPGA Integration role is intentionally deferred until a target board and
-toolchain are selected. Until then, board-specific work must be treated as an
-explicit architectural dependency rather than assumed.
-
-Role files extend these global rules and may define additional responsibilities.
-
----
-
-# Documentation
-
-When making architectural changes, update documentation if necessary.
-
-Documentation is considered part of the implementation.
-
----
-
-# Git Commit Convention
-
-Use the following format for new commits:
+## Git Commit Convention
 
 ```text
 <type>(<scope>): <imperative summary>
@@ -188,11 +177,7 @@ Use the following format for new commits:
 <footer>
 ```
 
-Keep the subject concise and explain the motivation or important design
-decisions in the body when needed. Use a repository-oriented scope such as
-`rtl`, `tb`, `docs`, `tooling`, `ci`, or a specific module.
-
-Supported types are:
+Supported types:
 
 - `feat` — new functionality
 - `fix` — defect correction
@@ -205,7 +190,11 @@ Supported types are:
 - `chore` — maintenance
 - `revert` — reversal of an earlier commit
 
-Examples:
+Scope is repository-oriented — `rtl`, `tb`, `docs`, `tooling`, `ci`, or a
+specific module.
+
+Keep the subject concise and explain motivation or important design decisions
+in the body.
 
 ```text
 feat(rtl): add parameterized counter
@@ -214,27 +203,7 @@ docs(architecture): define clock and reset policy
 fix(tb): correct reset sequencing
 ```
 
-Use the tracked [`.gitmessage`](.gitmessage) file as a local commit template
-with `git config commit.template .gitmessage`. Commit hooks and automated
-enforcement are deferred until the project needs them.
-
----
-
-# Philosophy
-
-Favor:
-
-- Simple solutions
-- Small commits
-- Modular design
-- Readability
-- Testability
-
-Avoid:
-
-- Premature optimization
-- Overengineering
-- Large unrelated refactors
-- Guessing user intent
-
-When uncertain, ask.
+[`.gitmessage`](.gitmessage) carries the same format for interactive commits
+(`git config commit.template .gitmessage`). Git strips it from the buffer, so
+the types above are repeated here for agents using `git commit -m`. Hooks and
+automated enforcement are deferred until the project needs them.

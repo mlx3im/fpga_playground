@@ -1,2 +1,6 @@
 # macOS metadata
 .DS_Store
+
+# CLAUDE.md is the tracked agent entry point for this repository and must
+# survive a global gitignore that excludes it.
+!CLAUDE.md
