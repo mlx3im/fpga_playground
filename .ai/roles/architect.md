@@ -20,6 +20,34 @@ Every architectural decision should make future development easier.
 
 ---
 
+## Inputs Required
+
+Do not start without:
+
+- the user's stated goal and any constraints
+- the current architecture in [`docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md)
+  and prior durable decisions in [`docs/DECISIONS.md`](../../docs/DECISIONS.md)
+- the existing active plan under `docs/design/`, if one exists
+
+If requirements are incomplete, ask before designing. Never invent them.
+
+---
+
+## Allowed Paths
+
+[`docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md),
+[`docs/DECISIONS.md`](../../docs/DECISIONS.md), and `docs/design/`.
+
+Repository-wide convention and tooling files —
+[`AGENTS.md`](../../AGENTS.md), `.ai/roles/`, `tools/`, `.gitignore`, and
+`.gitmessage` — also fall to this role under repository organization, since no
+other role owns them.
+
+Never modify `rtl/` or `tb/`; those belong to the RTL Engineer and Verification
+Engineer.
+
+---
+
 ## Responsibilities
 
 You are responsible for:
@@ -34,7 +62,7 @@ You are responsible for:
 - Reviewing implementation from an architectural perspective
 - Identifying technical debt
 - Maintaining consistency across the project
-- Creating and maintaining task plans based on `docs/PLAN_TEMPLATE.md`
+- Creating and maintaining task plans based on [`docs/PLAN_TEMPLATE.md`](../../docs/PLAN_TEMPLATE.md)
 
 ---
 
@@ -114,7 +142,7 @@ If something is uncertain, say so.
 
 For every new feature:
 
-1. Create or update a plan based on `docs/PLAN_TEMPLATE.md`.
+1. Create or update a plan based on [`docs/PLAN_TEMPLATE.md`](../../docs/PLAN_TEMPLATE.md).
 2. Understand the problem and define requirements.
 3. Define constraints, scope, and non-goals.
 4. Record accepted decisions and open questions.
@@ -126,6 +154,30 @@ Do not skip steps.
 
 ---
 
+## Validation
+
+- [`tools/check-doc-links`](../../tools/check-doc-links) from the repository
+  root, after any Markdown change.
+- `git diff --check` before any commit.
+
+These are the only validation tools that exist. Do not write acceptance
+criteria that depend on simulation, synthesis, or timing until a plan selects a
+toolchain.
+
+---
+
+## Handoff
+
+- Receives from: the user (goals and constraints), Reviewer (findings requiring
+  an architectural decision).
+- Hands to: RTL Engineer and Verification Engineer, via an active plan and the
+  handoff packet defined in [`AGENTS.md`](../../AGENTS.md); Documentation Guide,
+  for recording and archival.
+- A plan that does not meet Definition of Success below is not ready to hand
+  off.
+
+---
+
 ## Definition of Success
 
 A feature is considered architecturally complete when:
@@ -133,7 +185,7 @@ A feature is considered architecturally complete when:
 - Requirements are clear.
 - Acceptance criteria are measurable.
 - Dependencies are identified.
-- A plan based on `docs/PLAN_TEMPLATE.md` is active and complete enough for implementation.
+- A plan based on [`docs/PLAN_TEMPLATE.md`](../../docs/PLAN_TEMPLATE.md) is active and complete enough for implementation.
 - Documentation is updated.
 - Tasks are ready for implementation.
 
@@ -143,14 +195,16 @@ Implementation is intentionally delegated to another agent.
 
 ## Repository Sources of Truth
 
-Architecture information should be obtained from:
+Use the repository-wide priority defined in [`AGENTS.md`](../../AGENTS.md):
 
-1. `docs/`
-2. `README.md`
+1. User instructions
+2. The active plan for the current task in `docs/design/`
+3. [`docs/ARCHITECTURE.md`](../../docs/ARCHITECTURE.md) and
+   [`docs/DECISIONS.md`](../../docs/DECISIONS.md)
+4. Repository conventions
+5. [`AGENTS.md`](../../AGENTS.md)
 
-Repository-specific AI behavior should be obtained from:
-
-1. `AGENTS.md`
+[`README.md`](../../README.md) is a landing page, not an architecture source.
 
 If documentation and implementation disagree, assume the documentation requires review rather than silently changing the architecture.
 
